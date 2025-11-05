@@ -23,7 +23,8 @@ RUN /etc/my_init.d/00_regen_ssh_host_keys.sh
 
 RUN sed 's/main$/main universe/' -i /etc/apt/sources.list
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y -q update
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y -q install software-properties-common g++ make git curl
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y -q install software-properties-common g++ make git curl python3 python3-pip
+RUN ln -s /usr/bin/python3 /usr/bin/python || true
 RUN curl -sL https://deb.nodesource.com/setup_18.x | setuser root bash -
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y -q install nodejs && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

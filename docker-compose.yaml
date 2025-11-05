@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  haraka:
+    build:
+      context: .
+      platform: linux/amd64
+    image: my-haraka
+    platform: linux/amd64
+    container_name: haraka
+    ports:
+      - "25:25"
+    volumes:
+      - ./config:/etc/haraka:ro
+      - ./data:/etc/haraka/data
+    environment:
+      - HARAKA_INSTALL_PLUGINS=haraka-plugin-dkim,haraka-plugin-redis
+    restart: unless-stopped
